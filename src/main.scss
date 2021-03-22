@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+  font-family: "Roboto Light", sans-serif;
+}
+
+body, h1 {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+  padding-left: 15px;
+}
+
+.active-link {
+  border-bottom: 2px solid white;
+}
+
+.done {
+  background: #42B983;
+  color: white;
+  border-radius: 5px;
+}
+
+.active {
+  background: rgb(222, 173, 13);
+  color: white;
+  border-radius: 5px;
+}
+
+.incoming {
+  background: rgb(155, 154, 143);
+  color: white;
+  border-radius: 5px;
+}
+
+
