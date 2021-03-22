@@ -49,6 +49,13 @@ export default createStore({
   },
   actions: {
   },
+  getters: {
+    getTask: (state) => id => {
+      const dev = state.tasks.find(value => value.devTasks.some(value1 => value1.taskId === id))
+        .devTasks.find(value => value.taskId === id)
+      return dev;
+    }
+  },
   modules: {
   }
 })

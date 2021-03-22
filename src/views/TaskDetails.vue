@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div>ID: {{ id }}</div>
-    <div>{{task[0].taskTitle}}</div>
+    <div>{{ task.taskTitle }}</div>
   </div>
 </template>
 
@@ -10,23 +10,21 @@
 // import {ref} from "vue";
 
 import {useStore} from "vuex";
-import {onUpdated} from "@vue/runtime-core";
-import {ref} from "vue";
+import {onUpdated} from "vue";
+// eslint-disable-next-line no-unused-vars
+import {ref, reactive} from "vue";
 
 export default {
 name: "TaskDetails",
   props: ['id'],
   setup(props) {
   const store = useStore();
-  let task = ref([])
+
+  let task = reactive(store.getters.getTask(props.id))
   onUpdated(() => {
-    const { devTasks } = store.state.tasks.find(dev => dev.devTasks.find(task => task.taskId === props.id));
-    console.log(devTasks)
-    task.value = devTasks.filter(item => item.taskId === props.id)
+    task.value = store.getters.getTask(props.id)
     console.log(task.value)
   })
-
-    console.log(props.id)
 
     // const task = store.state.tasks
     // console.log(task)
@@ -35,7 +33,7 @@ name: "TaskDetails",
     //   const task =
     // }
     // const id = ref(props.id);
-    //
+
     return {
       task: task.value
     }
