@@ -63,6 +63,11 @@ export default createStore({
           }
         ]
       }
+    ],
+    statuses: [
+      { name: "Active", value: 'active' },
+      { name: "Done", value: 'done' },
+      { name: "Incoming", value: 'incoming' }
     ]
   },
   mutations: {
@@ -75,13 +80,15 @@ export default createStore({
           .devTasks.find(value => value.taskId === id);
     },
 
-    getFilteredTask: state => (searchTerm, developerName) => {
+    getFilteredTask: state => (searchTerm, developerName, status) => {
       console.log(developerName)
-      if (searchTerm || developerName) {
+      if (searchTerm || developerName || status) {
         return state.tasks.map(dev => {
           return {
             ...dev,
-            devTasks: dev.devTasks.filter(task => task.taskTitle.toLowerCase().includes(searchTerm.toLowerCase()))
+            devTasks: dev.devTasks
+              .filter(task => task.taskTitle.toLowerCase().includes(searchTerm.toLowerCase()))
+              .filter(task2 => !status ? true : task2.taskStatus === status)
           };
         }).filter(dev2 => !developerName ? true : dev2.developer === developerName)
       } else {

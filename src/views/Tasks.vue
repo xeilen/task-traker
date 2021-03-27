@@ -2,7 +2,7 @@
   <div class="task-container">
     <TaskList @select-task="emitSelectTask" :tasks="tasks" :selectedTask="selectedTask"/>
     <TaskDetails v-if="selectedTask" :task="selectedTask"/>
-    <Filter @testEmit="getEmitData" :developers="developers"/>
+    <Filter @testEmit="getEmitData" :developers="developers" :statuses="statuses"/>
   </div>
 
 </template>
@@ -21,14 +21,14 @@ name: "Tasks",
   setup() {
     const store = useStore();
     const developers = ref(store.state.tasks.map(dev => dev.developer));
+    const statuses = ref(store.state.statuses)
     console.log(developers.value)
     const tasks = ref(store.state.tasks)
     const selectedTask = ref(null);
 
     const getEmitData = (value) => {
-      tasks.value = store.getters.getFilteredTask(value.inputValue, value.selectedDeveloper)
+      tasks.value = store.getters.getFilteredTask(value.inputValue, value.selectedDeveloper, value.selectedStatus)
       console.log(value);
-      // console.log(tasks)
     }
 
     const emitSelectTask = (taskId) => {
@@ -49,7 +49,8 @@ name: "Tasks",
       getEmitData,
       emitSelectTask,
       tasks,
-      developers
+      developers,
+      statuses
     }
   }
 }

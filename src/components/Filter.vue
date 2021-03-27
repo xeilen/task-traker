@@ -6,20 +6,29 @@
         <input
             v-model="inputValue"
             type="text"
-            @keyup="$emit('testEmit', { inputValue, selectedDeveloper })"
+            @keyup="$emit('testEmit', { inputValue, selectedDeveloper, selectedStatus })"
         />
       </label>
     </div>
     <div>
-      <label for="">Select developer:
-        <select name="" id="" v-model="selectedDeveloper" @change="$emit('testEmit', { inputValue, selectedDeveloper })">
-          <option value="">Select developer</option>
+      <label>Select developer:
+        <select v-model="selectedDeveloper" @change="$emit('testEmit', { inputValue, selectedDeveloper, selectedStatus })">
+          <option value="">All devs</option>
           <option v-for="dev in developers" :key="dev" :value="dev">{{ dev }}</option>
+        </select>
+      </label>
+    </div>
+    <div>
+      <label>Filter by status
+        <select v-model="selectedStatus" @change="$emit('testEmit', { inputValue, selectedDeveloper, selectedStatus })">
+          <option value="">All</option>
+          <option v-for="status in statuses" :key="status.value" :value="status.value">{{status.name}}</option>
         </select>
       </label>
     </div>
     <div>{{inputValue}}</div>
     <div>{{ selectedDeveloper }}</div>
+    <div>{{ selectedStatus }}</div>
   </div>
 </template>
 
@@ -28,18 +37,17 @@ import {ref} from "vue";
 
 export default {
 name: "Filter",
-  props: ['developers'],
+  props: ['developers', 'statuses'],
   emits: ['testEmit'],
   setup() {
-
     const inputValue = ref('')
     const selectedDeveloper = ref('')
-
-
+    const selectedStatus = ref('')
 
     return {
       inputValue,
-      selectedDeveloper
+      selectedDeveloper,
+      selectedStatus
     }
   }
 }
