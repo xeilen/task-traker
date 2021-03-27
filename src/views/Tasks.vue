@@ -1,51 +1,55 @@
 <template>
   <div class="task-container">
-    <ul class="task-list">
-      <li class="task-list__dev-tasks" v-for="dev in tasks" :key="dev.developer">
-        <strong>{{ dev.developer }}</strong>
-        <ul>
-          <li
-              class="task-list__item"
-              v-for="task in dev.devTasks"
-              :key="task.taskId"
-              :class="{
-                active: task.taskStatus === 'active',
-                done: task.taskStatus === 'done',
-                incoming: task.taskStatus === 'incoming'
-              }"
-              @click="selectTask(task.taskId)"
-          >
-            <span class="">{{task.taskId}} - {{ task.taskTitle }}</span>
-          </li>
-        </ul>
-      </li>
-    </ul>
-    <TaskDetails v-if="selectedTask" :id="selectedTask"/>
+    <TaskList @select-task="emitSelectTask" :tasks="tasks" :selectedTask="selectedTask"/>
+    <TaskDetails v-if="selectedTask" :task="selectedTask"/>
+    <Filter @testEmit="getEmitData" :developers="developers"/>
   </div>
 
 </template>
 
 <script>
-import {useStore} from 'vuex'
 import TaskDetails from "@/views/TaskDetails";
-import { ref } from "vue";
+import Filter from "@/components/Filter";
+import {useStore} from 'vuex'
+import TaskList from "@/components/TaskList";
+// eslint-disable-next-line no-unused-vars
+import {ref} from "vue";
+
 export default {
 name: "Tasks",
-  components: { TaskDetails },
+  components: {TaskList, Filter, TaskDetails },
   setup() {
     const store = useStore();
-    console.log(store.state)
+    const developers = ref(store.state.tasks.map(dev => dev.developer));
+    console.log(developers.value)
+    const tasks = ref(store.state.tasks)
+    const selectedTask = ref(null);
 
-    const selectedTask = ref(null)
-
-    const selectTask = (taskID) => {
-      selectedTask.value = taskID
+    const getEmitData = (value) => {
+      tasks.value = store.getters.getFilteredTask(value.inputValue, value.selectedDeveloper)
+      console.log(value);
+      // console.log(tasks)
     }
 
+    const emitSelectTask = (taskId) => {
+      const task = store.getters.getTask(taskId)
+      selectedTask.value = task
+      console.log(task)
+    }
+
+    // computed(() => {
+    //
+    // })
+
+
     return {
-      tasks: store.state.tasks,
+      // tasks: store.getters.getFilteredTask(fromInput),
       selectedTask,
-      selectTask
+      // fromInput,
+      getEmitData,
+      emitSelectTask,
+      tasks,
+      developers
     }
   }
 }
@@ -73,12 +77,15 @@ name: "Tasks",
       align-items: center;
       transition: 0.3s;
       will-change: contents;
+      font-weight: bold;
 
-      &:hover {
-        transform: scale(1.02);
-
-
+      &--chosen {
+        transform: translate(10px);
       }
+
+      //&:hover {
+      //  transform: translate(2px);
+      //}
 
     }
   }
