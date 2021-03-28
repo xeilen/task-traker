@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Tasks from "@/views/Tasks";
 import Overview from "@/views/Overview";
 import TaskDetails from "@/views/TaskDetails";
+import AddTask from "@/views/AddTask";
 
 const routes = [
   {
@@ -19,6 +20,11 @@ const routes = [
     name: 'TaskDetails',
     component: TaskDetails,
     props: true
+  },
+  {
+    path: '/add',
+    name: 'AddTask',
+    component: AddTask
   }
   // {
   //   path: '/about',

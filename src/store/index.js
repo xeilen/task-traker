@@ -4,7 +4,8 @@ export default createStore({
   state: {
     tasks: [
       {
-        developer: 'Petro',
+        developer: 'Petro Ivanov',
+        id: 3,
         devTasks: [
           {
             taskId: 'DS-532',
@@ -24,7 +25,8 @@ export default createStore({
         ]
       },
       {
-        developer: 'Nazar',
+        developer: 'Nazar Kovalenko',
+        id: 1,
         devTasks: [
           {
             taskId: 'DS-35324',
@@ -44,7 +46,8 @@ export default createStore({
         ]
       },
       {
-        developer: 'Roman',
+        developer: 'Roman Banderovski',
+        id: 2,
         devTasks: [
           {
             taskId: 'DS-1324',
@@ -68,6 +71,11 @@ export default createStore({
       { name: "Active", value: 'active' },
       { name: "Done", value: 'done' },
       { name: "Incoming", value: 'incoming' }
+    ],
+    developers: [
+      { name: 'Nazar Kovalenko', id: 1 },
+      { name: 'Roman Banderovski', id: 2 },
+      { name: 'Petro Ivanov', id: 3 },
     ]
   },
   mutations: {
@@ -80,9 +88,9 @@ export default createStore({
           .devTasks.find(value => value.taskId === id);
     },
 
-    getFilteredTask: state => (searchTerm, developerName, status) => {
-      console.log(developerName)
-      if (searchTerm || developerName || status) {
+    getFilteredTask: state => (searchTerm, developerId, status) => {
+      console.log(developerId)
+      if (searchTerm || developerId || status) {
         return state.tasks.map(dev => {
           return {
             ...dev,
@@ -90,7 +98,7 @@ export default createStore({
               .filter(task => task.taskTitle.toLowerCase().includes(searchTerm.toLowerCase()))
               .filter(task2 => !status ? true : task2.taskStatus === status)
           };
-        }).filter(dev2 => !developerName ? true : dev2.developer === developerName)
+        }).filter(dev2 => !developerId ? true : dev2.id === developerId)
       } else {
         return state.tasks
       }

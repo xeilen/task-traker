@@ -14,7 +14,7 @@
       <label>Select developer:
         <select v-model="selectedDeveloper" @change="$emit('testEmit', { inputValue, selectedDeveloper, selectedStatus })">
           <option value="">All devs</option>
-          <option v-for="dev in developers" :key="dev" :value="dev">{{ dev }}</option>
+          <option v-for="dev in developers" :key="dev" :value="dev.id">{{ dev.name }}</option>
         </select>
       </label>
     </div>

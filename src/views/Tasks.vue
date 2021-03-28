@@ -20,9 +20,9 @@ name: "Tasks",
   components: {TaskList, Filter, TaskDetails },
   setup() {
     const store = useStore();
-    const developers = ref(store.state.tasks.map(dev => dev.developer));
+    const developers = ref(store.state.developers);
+    console.log(developers)
     const statuses = ref(store.state.statuses)
-    console.log(developers.value)
     const tasks = ref(store.state.tasks)
     const selectedTask = ref(null);
 

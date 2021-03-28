@@ -8,6 +8,7 @@
       <nav class="nav">
         <router-link to="/">Tasks</router-link>
         <router-link to="/overview">Overview</router-link>
+        <router-link to="/add">Add task</router-link>
         <!--        <ul class="nav__list">-->
         <!--          <li class="nav__item">Tasks</li>-->
         <!--          <li class="nav__item">Overview</li>-->
@@ -18,8 +19,15 @@
 </template>
 
 <script>
+// import {useStore} from "vuex";
+// import {ref} from "vue";
+
 export default {
-name: "Header"
+name: "Header",
+  setup() {
+    // const store = useStore()
+    // const developers = ref()
+  }
 }
 </script>
 
