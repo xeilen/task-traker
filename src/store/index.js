@@ -79,6 +79,15 @@ export default createStore({
     ]
   },
   mutations: {
+    addTask (state, payload) {
+      console.log(state)
+      console.log(payload)
+      state.tasks.forEach(dev => {
+        if (dev.id === payload.id) {
+          dev.devTasks = [...dev.devTasks, ...payload.tasks]
+        }
+      })
+    }
   },
   actions: {
   },

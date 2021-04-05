@@ -38,13 +38,15 @@ name: "AddTask",
     const dev = ref('')
 
     const submit = () => {
-      console.log({
+     const newtodo = {
         developer: developers.value.filter(developer => developer.id === dev.value)[0].name,
         id: dev.value,
         tasks: [
           { taskTitle: title.value, taskId: id.value, taskStatus: status.value  }
         ]
-      })
+      }
+
+      store.commit('addTask', newtodo)
     }
 
     return {
