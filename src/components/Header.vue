@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="header__logo">
-      <h1 class="header__title">Task Tracker</h1>
+      <h1 class="header__title font-bold">Task Tracker</h1>
     </div>
 
     <div class="header__nav">

@@ -1,10 +1,11 @@
 <template>
   <div class="container">
     <h2>This is the Filter component</h2>
-    <div>
+    <div class="">
       <label> Filter by retailer:
         <input
             v-model="inputValue"
+            class="border"
             type="text"
             @keyup="$emit('testEmit', { inputValue, selectedDeveloper, selectedStatus })"
         />
@@ -12,7 +13,7 @@
     </div>
     <div>
       <label>Select developer:
-        <select v-model="selectedDeveloper" @change="$emit('testEmit', { inputValue, selectedDeveloper, selectedStatus })">
+        <select class="border" v-model="selectedDeveloper" @change="$emit('testEmit', { inputValue, selectedDeveloper, selectedStatus })">
           <option value="">All devs</option>
           <option v-for="dev in developers" :key="dev" :value="dev.id">{{ dev.name }}</option>
         </select>
@@ -20,7 +21,7 @@
     </div>
     <div>
       <label>Filter by status
-        <select v-model="selectedStatus" @change="$emit('testEmit', { inputValue, selectedDeveloper, selectedStatus })">
+        <select class="border" v-model="selectedStatus" @change="$emit('testEmit', { inputValue, selectedDeveloper, selectedStatus })">
           <option value="">All</option>
           <option v-for="status in statuses" :key="status.value" :value="status.value">{{status.name}}</option>
         </select>

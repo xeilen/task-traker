@@ -1,24 +1,24 @@
 <template>
-  <form @submit.prevent="submit">
-    <label>Task Id:
-      <input v-model="id" type="text">
+  <form @submit.prevent="submit" class="flex flex-col justify-center p-4">
+    <label class="mb-3">Task Id:
+      <input class="border-2 border-green-400 myClass" v-model="id" type="text">
     </label>
-    <label>Task title:
-      <input v-model="title" type="text">
+    <label  class="mb-3">Task title:
+      <input class="border border-green-400" v-model="title" type="text">
     </label>
-    <label>Task status:
-      <select v-model="status">
+    <label  class="mb-3">Task status:
+      <select class="border" v-model="status">
         <option value="">Select Status</option>
         <option v-for="status in statuses" :key="status.value" :value="status.value">{{ status.name }}</option>
       </select>
     </label>
-    <label>Dev:
-      <select v-model="dev">
+    <label  class="mb-3">Dev:
+      <select class="border" v-model="dev">
         <option value="">Select Dev</option>
         <option v-for="dev in developers" :key="dev.id" :value="dev.id">{{ dev.name }}</option>
       </select>
     </label>
-    <button>Add</button>
+    <button class="max-w-sm bg-green-400 text-white text-lg rounded-md">Add</button>
   </form>
 </template>
 
@@ -62,6 +62,12 @@ name: "AddTask",
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+ .myClass {
+   &:focus {
+     outline: none;
+     border: 2px solid crimson;
+     border-radius: 3px;
+   }
+ }
 </style>
