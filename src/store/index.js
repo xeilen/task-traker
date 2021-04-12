@@ -10,17 +10,20 @@ export default createStore({
           {
             taskId: 'DS-532',
             taskTitle: 'WalmartToGo',
-            taskStatus: 'done'
+            taskStatus: 'done',
+            workbenchLink: 'https://google.com.ua'
           },
           {
             taskId: 'DS-42152',
             taskTitle: 'Amazon',
             taskStatus: 'active',
+            workbenchLink: 'https://google.com.ua'
           },
           {
             taskId: 'DS-13245',
             taskTitle: 'OzonRu',
-            taskStatus: 'incoming'
+            taskStatus: 'incoming',
+            workbenchLink: 'https://google.com.ua'
           }
         ]
       },
@@ -31,17 +34,20 @@ export default createStore({
           {
             taskId: 'DS-35324',
             taskTitle: 'WalmartToGo',
-            taskStatus: 'done'
+            taskStatus: 'done',
+            workbenchLink: 'https://google.com.ua',
           },
           {
             taskId: 'DS-421152',
             taskTitle: 'Amazon',
             taskStatus: 'active',
+            workbenchLink: 'https://google.com.ua',
           },
           {
             taskId: 'DS-12445',
             taskTitle: 'OzonRu',
-            taskStatus: 'incoming'
+            taskStatus: 'incoming',
+            workbenchLink: 'https://google.com.ua'
           }
         ]
       },
@@ -53,16 +59,19 @@ export default createStore({
             taskId: 'DS-1324',
             taskTitle: 'Rozetka',
             taskStatus: 'done',
+            workbenchLink: 'https://google.com.ua'
           },
           {
             taskId: 'DS-1252',
             taskTitle: 'eBuy',
             taskStatus: 'active',
+            workbenchLink: 'https://google.com.ua'
           },
           {
             taskId: 'DS-2245',
             taskTitle: 'PromUa',
-            taskStatus: 'incoming'
+            taskStatus: 'incoming',
+            workbenchLink: 'https://google.com.ua'
           }
         ]
       }

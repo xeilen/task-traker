@@ -3,6 +3,7 @@
     <div>ID: {{ task.taskId }}</div>
     <div>Title: {{ task.taskTitle }}</div>
     <div>Status: {{ task.taskStatus }}</div>
+    <div><a class="xl:text-blue-500 text-sm" target="_blank" :href="task.workbenchLink">Source on Workbench</a></div>
 <!--    <div>{{ task.taskTitle }}</div>-->
   </div>
 </template>

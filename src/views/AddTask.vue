@@ -6,6 +6,9 @@
     <label  class="mb-3">Task title:
       <input class="border border-green-400" v-model="title" type="text">
     </label>
+    <label  class="mb-3">Source link:
+      <input class="border border-green-400" v-model="link" type="text">
+    </label>
     <label  class="mb-3">Task status:
       <select class="border" v-model="status">
         <option value="">Select Status</option>
@@ -36,22 +39,33 @@ name: "AddTask",
     const title = ref('');
     const status = ref('');
     const dev = ref('')
+    const link = ref('')
 
     const submit = () => {
      const newtodo = {
         developer: developers.value.filter(developer => developer.id === dev.value)[0].name,
         id: dev.value,
         tasks: [
-          { taskTitle: title.value, taskId: id.value, taskStatus: status.value  }
+          {
+            taskTitle: title.value,
+            taskId: id.value,
+            taskStatus: status.value,
+            workbenchLink: link.value
+          }
         ]
       }
 
       store.commit('addTask', newtodo)
+      id.value = '';
+      title.value = '';
+      status.value = '';
+      dev.value = '';
     }
 
     return {
       id,
       title,
+      link,
       status,
       dev,
       developers,

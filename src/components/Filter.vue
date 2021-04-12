@@ -41,6 +41,7 @@ name: "Filter",
   props: ['developers', 'statuses'],
   emits: ['testEmit'],
   setup() {
+    //todo implement reactive instead of ref
     const inputValue = ref('')
     const selectedDeveloper = ref('')
     const selectedStatus = ref('')
