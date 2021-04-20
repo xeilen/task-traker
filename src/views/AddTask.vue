@@ -45,7 +45,7 @@ name: "AddTask",
      const newtodo = {
         developer: developers.value.filter(developer => developer.id === dev.value)[0].name,
         id: dev.value,
-        tasks: [
+        devTasks: [
           {
             taskTitle: title.value,
             taskId: id.value,

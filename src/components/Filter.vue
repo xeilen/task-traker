@@ -55,23 +55,18 @@ name: "Filter",
     isLoading.value = true;
     console.log(isLoading.value)
     const devs = ref([]);
-    const data = db.firestore().collection('developers')
+    const data = db.firestore().collection('developers');
     data.onSnapshot(snapshot => {
       snapshot.docChanges().forEach(item => {
-        console.log(devs.value.some(it => it.id === item.id))
-        if (devs.value.some(it => it.id === item.id)) {
-          const index = devs.value.findIndex(it => it.id === item.id);
-          devs.value[index] = item;
-        }
-        devs.value.push(item.doc.data());
+        // console.log(item.type)
+        devs.value = [...devs.value, item.doc.data()]
       });
       store.commit('addDevelopers', devs.value)
-      console.log(devs.value)
+      // console.log(devs.value)
     })
 
     isLoading.value = false
-    console.log(isLoading.value)
-
+    // console.log(isLoading.value);
 
     return {
       inputValue,
