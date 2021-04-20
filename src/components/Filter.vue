@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div v-if="!isLoading" class="container">
     <h2>This is the Filter component</h2>
     <div class="">
       <label> Filter by retailer:
@@ -15,7 +15,7 @@
       <label>Select developer:
         <select class="border" v-model="selectedDeveloper" @change="$emit('testEmit', { inputValue, selectedDeveloper, selectedStatus })">
           <option value="">All devs</option>
-          <option v-for="dev in developers" :key="dev" :value="dev.id">{{ dev.name }}</option>
+          <option v-for="dev in devs" :key="dev" :value="dev.id">{{ dev.name }}</option>
         </select>
       </label>
     </div>
@@ -30,11 +30,15 @@
     <div>{{inputValue}}</div>
     <div>{{ selectedDeveloper }}</div>
     <div>{{ selectedStatus }}</div>
+    <div v-for="dev in devs" :key="dev.name">{{dev.name}}</div>
   </div>
+  <div v-else><h2>Loading...</h2></div>
 </template>
 
 <script>
 import {ref} from "vue";
+import db from "../db";
+import {useStore} from "vuex";
 
 export default {
 name: "Filter",
@@ -45,11 +49,36 @@ name: "Filter",
     const inputValue = ref('')
     const selectedDeveloper = ref('')
     const selectedStatus = ref('')
+    const isLoading = ref(false)
+    const store = useStore();
+
+    isLoading.value = true;
+    console.log(isLoading.value)
+    const devs = ref([]);
+    const data = db.firestore().collection('developers')
+    data.onSnapshot(snapshot => {
+      snapshot.docChanges().forEach(item => {
+        console.log(devs.value.some(it => it.id === item.id))
+        if (devs.value.some(it => it.id === item.id)) {
+          const index = devs.value.findIndex(it => it.id === item.id);
+          devs.value[index] = item;
+        }
+        devs.value.push(item.doc.data());
+      });
+      store.commit('addDevelopers', devs.value)
+      console.log(devs.value)
+    })
+
+    isLoading.value = false
+    console.log(isLoading.value)
+
 
     return {
       inputValue,
       selectedDeveloper,
-      selectedStatus
+      selectedStatus,
+      isLoading,
+      devs
     }
   }
 }

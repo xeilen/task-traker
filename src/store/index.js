@@ -81,11 +81,7 @@ export default createStore({
       { name: "Done", value: 'done' },
       { name: "Incoming", value: 'incoming' }
     ],
-    developers: [
-      { name: 'Nazar Kovalenko', id: 1 },
-      { name: 'Roman Banderovski', id: 2 },
-      { name: 'Petro Ivanov', id: 3 },
-    ]
+    developers: []
   },
   mutations: {
     addTask (state, payload) {
@@ -96,6 +92,10 @@ export default createStore({
           dev.devTasks = [...dev.devTasks, ...payload.tasks]
         }
       })
+    },
+
+    addDevelopers (state, payload) {
+      state.developers = payload;
     }
   },
   actions: {

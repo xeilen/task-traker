@@ -1,33 +1,20 @@
 <template>
-  <Header />
-<!--  <div id="nav">-->
-<!--    <router-link to="/">Home</router-link> |-->
-<!--    <router-link to="/about">About</router-link>-->
-<!--  </div>-->
-  <router-view/>
+  <Header/>
+  <!--  <div id="nav">-->
+  <!--    <router-link to="/">Home</router-link> |-->
+  <!--    <router-link to="/about">About</router-link>-->
+  <!--  </div>-->
+  <router-view v-if="!isLoading"/>
+  <h2 v-if="isLoading">Loading...</h2>
 </template>
 
 <script>
-import Header from "@/components/Header";
-import db from './db'
+import Header from "./components/Header";
+
 export default {
   components: {Header},
-   setup() {
-    const data = db.firestore().collection('testUsers')
-    data.onSnapshot(snapshot => {
-      snapshot.docChanges().forEach(item => {
-        console.log(item.doc.id)
-      })
-    })
-    // data.onSnapshot(snapshot => {
-    //   snapshot.docs.forEach(item => {
-    //     console.log(item.data());
-    //   });
-    //   //     .forEach(item => {
-    //   //   console.log(item.doc.data())
-    //   // })
+  setup() {
 
-     console.log(data)
   }
 }
 </script>

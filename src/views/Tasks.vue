@@ -21,7 +21,7 @@ name: "Tasks",
   setup() {
     const store = useStore();
     const developers = ref(store.state.developers);
-    console.log(developers)
+    console.log(developers.value, 'devs')
     const statuses = ref(store.state.statuses)
     const tasks = ref(store.state.tasks)
     const selectedTask = ref(null);
